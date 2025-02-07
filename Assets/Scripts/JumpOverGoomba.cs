@@ -8,6 +8,8 @@ public class JumpOverGoomba : MonoBehaviour
 
     public Transform enemyLocation;
     public TextMeshProUGUI scoreText;
+
+    public TextMeshProUGUI scoreTextOver;
     private bool onGroundState;
 
     [System.NonSerialized]
@@ -39,17 +41,20 @@ public class JumpOverGoomba : MonoBehaviour
         {
             onGroundState = false;
             countScoreState = true;
+
         }
 
         // when jumping, and Goomba is near Mario and we haven't registered our score
         if (!onGroundState && countScoreState)
         {
-            score++;
-            if (Mathf.Abs(transform.position.x - enemyLocation.position.x) < 0.5f)
+            Debug.Log(Mathf.Abs(transform.position.x - enemyLocation.position.x));
+
+            if (Mathf.Abs(transform.position.x - enemyLocation.position.x) < 10f)
             {
                 countScoreState = false;
                 score++;
                 scoreText.text = "Score: " + score.ToString();
+                scoreTextOver.text = "Score: " + score.ToString();
                 Debug.Log(score);
             }
         }

@@ -20,9 +20,13 @@ public class PlayerMovement : MonoBehaviour
     private bool faceRightState = true;
 
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI scoreTextOver;
     public GameObject enemies;
 
     public GameObject gameOverUI;
+    public JumpOverGoomba jumpOverGoomba;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -103,6 +107,8 @@ public class PlayerMovement : MonoBehaviour
     public void RestartButtonCallback(int input)
     {
         Debug.Log("Restart!");
+
+        gameOverUI.SetActive(false);
         // reset everything
         ResetGame();
         // resume time
@@ -119,14 +125,14 @@ public class PlayerMovement : MonoBehaviour
         marioSprite.flipX = false;
         // reset score
         scoreText.text = "Score: 0";
+        scoreTextOver.text = "Score: 0";
         // reset Goomba
         foreach (Transform eachChild in enemies.transform)
         {
             eachChild.transform.localPosition = eachChild.GetComponent<EnemyMovement>().startPosition;
         }
 
-
-
+        jumpOverGoomba.score = 0;
     }
 
 }

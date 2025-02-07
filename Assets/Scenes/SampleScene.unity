@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 90092352}
   - component: {fileID: 90092354}
   - component: {fileID: 90092353}
+  - component: {fileID: 90092355}
   m_Layer: 5
   m_Name: GameOverScreen
   m_TagString: Untagged
@@ -363,6 +364,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 90092351}
   m_CullTransparentMesh: 1
+--- !u!114 &90092355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90092351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4bc31f18abb1a248884616d478f1aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLocation: {fileID: 1312267171}
+  scoreText: {fileID: 1360339144}
+  scoreTextOver: {fileID: 0}
+  boxSize: {x: 1, y: 1, z: 0}
+  maxDistance: 0.1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &96619596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1409,6 +1430,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1534,6 +1556,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd3079094718c642a8f7e1994d097bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 669862016}
 --- !u!1 &587514438
 GameObject:
   m_ObjectHideFlags: 0
@@ -1718,7 +1753,8 @@ GameObject:
   - component: {fileID: 669862014}
   - component: {fileID: 669862013}
   - component: {fileID: 669862017}
-  m_Layer: 0
+  - component: {fileID: 669862018}
+  m_Layer: 7
   m_Name: Mario
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1737,11 +1773,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfb773cc216bd647a259f4ce85e2217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 20
   upSpeed: 15
-  maxSpeed: 15
+  maxSpeed: 25
   scoreText: {fileID: 1453048886}
+  scoreTextOver: {fileID: 1360339144}
   enemies: {fileID: 1312267170}
+  gameOverUI: {fileID: 90092351}
+  jumpOverGoomba: {fileID: 669862018}
 --- !u!50 &669862014
 Rigidbody2D:
   serializedVersion: 5
@@ -1757,7 +1796,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 3
   m_AngularDamping: 0
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1885,6 +1924,26 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1.0078844}
   m_EdgeRadius: 0
+--- !u!114 &669862018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669862012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4bc31f18abb1a248884616d478f1aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLocation: {fileID: 1312267171}
+  scoreText: {fileID: 1453048886}
+  scoreTextOver: {fileID: 1360339144}
+  boxSize: {x: 1, y: 1, z: 0}
+  maxDistance: 0.1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &682934572
 GameObject:
   m_ObjectHideFlags: 0
@@ -2915,7 +2974,6 @@ GameObject:
   - component: {fileID: 1288593137}
   - component: {fileID: 1288593136}
   - component: {fileID: 1288593135}
-  - component: {fileID: 1288593138}
   m_Layer: 6
   m_Name: Ground
   m_TagString: Ground
@@ -3039,25 +3097,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 233427346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1288593138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1288593134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4bc31f18abb1a248884616d478f1aba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyLocation: {fileID: 1521926535}
-  scoreText: {fileID: 1453048886}
-  boxSize: {x: 0, y: 0, z: 0}
-  maxDistance: 0
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1 &1300601243
 GameObject:
   m_ObjectHideFlags: 0
@@ -3170,7 +3209,7 @@ Transform:
   m_GameObject: {fileID: 1312267170}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.146523, y: 5.1152034, z: -0.16690984}
+  m_LocalPosition: {x: 8.146523, y: 5.1152034, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
