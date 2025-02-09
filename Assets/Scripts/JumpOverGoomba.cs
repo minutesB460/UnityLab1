@@ -49,7 +49,7 @@ public class JumpOverGoomba : MonoBehaviour
         {
             Debug.Log(Mathf.Abs(transform.position.x - enemyLocation.position.x));
 
-            if (Mathf.Abs(transform.position.x - enemyLocation.position.x) < 10f)
+            if (Mathf.Abs(transform.position.x - enemyLocation.position.x) < 0.5f)
             {
                 countScoreState = false;
                 score++;
@@ -88,6 +88,15 @@ public class JumpOverGoomba : MonoBehaviour
             return false;
         }
     }
+
+
+    // helper
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawCube(transform.position - transform.up * maxDistance, boxSize);
+    }
+
 }
 
 
