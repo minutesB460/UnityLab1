@@ -1358,7 +1358,7 @@ GameObject:
   - component: {fileID: 669862021}
   m_Layer: 7
   m_Name: Mario
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4581,6 +4581,7 @@ GameObject:
   - component: {fileID: 8644692976236485476}
   - component: {fileID: 8644692976236485475}
   - component: {fileID: 8644692976236485477}
+  - component: {fileID: 8644692976236485478}
   m_Layer: 8
   m_Name: Question box
   m_TagString: Obstacle
@@ -4622,7 +4623,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.27021402}
+  m_Offset: {x: 0, y: 0.0069257617}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4632,7 +4633,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 0.45957196}
+  m_Size: {x: 1, y: 1.0138515}
   m_EdgeRadius: 0
 --- !u!231 &8644692976236485475
 SpringJoint2D:
@@ -4654,7 +4655,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 1
   m_Distance: 1.4161513
   m_DampingRatio: 1
-  m_Frequency: 1
+  m_Frequency: 800
 --- !u!50 &8644692976236485476
 Rigidbody2D:
   serializedVersion: 5
@@ -4667,10 +4668,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.45957196
+  m_Mass: 1.0138515
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -4704,6 +4705,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8644692976236485478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8122180065183962488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a805a65ef8fe11459adcb82692f3ccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinSound: {fileID: 8300000, guid: d885ffc842af744d89f7d595ffcc176a, type: 3}
 --- !u!1001 &9099321797879514481
 PrefabInstance:
   m_ObjectHideFlags: 0
