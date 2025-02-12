@@ -35,7 +35,7 @@ public class JumpOverGoomba : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log("On Ground: " + onGroundState);
+        // Debug.Log("On Ground: " + onGroundState);
         // mario jumps
         if (Input.GetKeyDown("space") && onGroundState)
         {
@@ -47,7 +47,7 @@ public class JumpOverGoomba : MonoBehaviour
         // when jumping, and Goomba is near Mario and we haven't registered our score
         if (!onGroundState && countScoreState)
         {
-            Debug.Log(Mathf.Abs(transform.position.x - enemyLocation.position.x));
+            // Debug.Log(Mathf.Abs(transform.position.x - enemyLocation.position.x));
 
             if (Mathf.Abs(transform.position.x - enemyLocation.position.x) < 0.5f)
             {
@@ -79,12 +79,12 @@ public class JumpOverGoomba : MonoBehaviour
     {
         if (Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, maxDistance, layerMask))
         {
-            Debug.Log("on ground");
+            // Debug.Log("on ground");
             return true;
         }
         else
         {
-            Debug.Log("not on ground");
+            // Debug.Log("not on ground");
             return false;
         }
     }

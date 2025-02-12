@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class QuestionBox : MonoBehaviour
 {
-
+    public GameObject coinPrefab;
     public AudioClip coinSound;
     private Animator questionAnimator;
-    private bool isUsed = false;
+    private bool istriggered = false;
 
     private SpringJoint2D springJoint;
 
@@ -19,19 +19,31 @@ public class QuestionBox : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!isUsed && collision.gameObject.CompareTag("Player"))
+        if (!istriggered && collision.gameObject.CompareTag("Player"))
         {
             Vector2 hitDirection = collision.GetContact(0).normal;
-            Debug.Log("Hit Direction Y: " + hitDirection.y);
 
             if (hitDirection.y > 0)
             {
                 questionAnimator.SetTrigger("Hit");
                 AudioSource.PlayClipAtPoint(coinSound, transform.position);
 
-                springJoint.frequency = 500;
+                springJoint.frequency = 10;
 
                 Invoke(nameof(ResetSpring), 0.2f);
+
+                GameObject coin = Instantiate(coinPrefab, transform.position + Vector3.up * 2f, Quaternion.identity);
+                Animator coinAnimator = coin.GetComponent<Animator>();
+                coinAnimator.SetTrigger("Hit");
+
+                Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
+                if (coinRb != null)
+                {
+                    coinRb.linearVelocity = new Vector2(0, 5f);  
+                }
+
+                Destroy(coin, 2f);
+   
             }
         }
     }
@@ -41,7 +53,7 @@ public class QuestionBox : MonoBehaviour
         springJoint.enabled = false;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-        isUsed = true;
+        istriggered = true;
     }
 
 }
