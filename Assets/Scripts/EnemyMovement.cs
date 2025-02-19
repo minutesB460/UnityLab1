@@ -13,9 +13,17 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody2D enemyBody;
     public Vector3 startPosition = new Vector3(0, 0, 0f);
 
+    public Animator goombaAnimator;
+    public AudioSource goombaAudio;
+
+    private Collider2D goombaCollider;
+
     void Start()
     {
         enemyBody = GetComponent<Rigidbody2D>();
+        goombaAnimator = GetComponent<Animator>();
+        goombaAudio = GetComponent<AudioSource>();
+        goombaCollider = GetComponent<Collider2D>();
         // get the starting position
         originalX = transform.position.x;
         ComputeVelocity();
@@ -52,4 +60,30 @@ public class EnemyMovement : MonoBehaviour
     }
 
 
+    public void GameRestart()
+    {
+        transform.localPosition = startPosition;
+        originalX = transform.position.x;
+        moveRight = -1;
+        ComputeVelocity();
+        gameObject.SetActive(true); 
+        goombaCollider.enabled = true;
+    }
+
+    public void Stomped()
+    {
+        goombaAnimator.Play("Stomp");
+        goombaAudio.PlayOneShot(goombaAudio.clip);
+        goombaCollider.enabled = false;
+        // Destroy(gameObject, 0.5f);
+        Invoke("HideGoomba", 0.5f);
+    }
+
+    void HideGoomba()
+    {
+        gameObject.SetActive(false); 
+    }
+
+
 }
+

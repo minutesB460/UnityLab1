@@ -3,15 +3,18 @@ using UnityEngine;
 public class brickbox : MonoBehaviour
 {
     public GameObject coinPrefab;  
-    public AudioClip coinSound;    
+    public AudioSource audioSource;   
+    public AudioClip coinSound; 
     private bool istriggered = false;
 
     private SpringJoint2D springJoint;
+    GameManager gameManager;
 
     void Start()
     {
         springJoint = GetComponent<SpringJoint2D>();
         springJoint.frequency = 0; 
+        gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -25,11 +28,15 @@ public class brickbox : MonoBehaviour
             // plyaer hits the box from below 
             if (hitDirection.y > 0)
             {
-                AudioSource.PlayClipAtPoint(coinSound, transform.position);
+                // AudioSource.PlayClipAtPoint(coinSound, transform.position);
+                audioSource.PlayOneShot(coinSound);
 
                 springJoint.frequency = 10; 
 
                 Invoke(nameof(ResetSpring), 0.2f); 
+
+                //Increase the score 
+                gameManager.IncreaseScore(1); 
 
                 // Spawn the coin
                 GameObject coin = Instantiate(coinPrefab, transform.position + Vector3.up * 2f, Quaternion.identity);

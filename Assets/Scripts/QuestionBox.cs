@@ -5,16 +5,20 @@ public class QuestionBox : MonoBehaviour
 {
     public GameObject coinPrefab;
     public AudioClip coinSound;
+    public AudioSource audioSource;   
     private Animator questionAnimator;
     private bool istriggered = false;
 
     private SpringJoint2D springJoint;
+
+    GameManager gameManager;
 
     void Start()
     {
         questionAnimator = GetComponent<Animator>();
         springJoint = GetComponent<SpringJoint2D>();
         springJoint.frequency = 0;
+        gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -26,7 +30,12 @@ public class QuestionBox : MonoBehaviour
             if (hitDirection.y > 0)
             {
                 questionAnimator.SetTrigger("Hit");
-                AudioSource.PlayClipAtPoint(coinSound, transform.position);
+                // AudioSource.PlayClipAtPoint(coinSound, transform.position);
+                audioSource.PlayOneShot(coinSound);
+
+                //Increase the score 
+                gameManager.IncreaseScore(1); 
+
 
                 springJoint.frequency = 10;
 

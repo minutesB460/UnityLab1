@@ -7,23 +7,23 @@ public class JumpOverGoomba : MonoBehaviour
 {
 
     public Transform enemyLocation;
-    public TextMeshProUGUI scoreText;
+    // public TextMeshProUGUI scoreText;
 
-    public TextMeshProUGUI scoreTextOver;
+    // public TextMeshProUGUI scoreTextOver;
     private bool onGroundState;
 
     [System.NonSerialized]
-    public int score = 0; // we don't want this to show up in the inspector
+    // public int score = 0; // we don't want this to show up in the inspector
 
     private bool countScoreState = false;
     public Vector3 boxSize;
     public float maxDistance;
     public LayerMask layerMask;
     // Start is called before the first frame update
-
+    GameManager gameManager;
     void Start()
     {
-
+         gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -44,20 +44,21 @@ public class JumpOverGoomba : MonoBehaviour
 
         }
 
-        // when jumping, and Goomba is near Mario and we haven't registered our score
-        if (!onGroundState && countScoreState)
-        {
-            // Debug.Log(Mathf.Abs(transform.position.x - enemyLocation.position.x));
+        // // when jumping, and Goomba is near Mario and we haven't registered our score
+        // if (!onGroundState && countScoreState)
+        // {
+        //     // Debug.Log(Mathf.Abs(transform.position.x - enemyLocation.position.x));
 
-            if (Mathf.Abs(transform.position.x - enemyLocation.position.x) < 0.5f)
-            {
-                countScoreState = false;
-                score++;
-                scoreText.text = "Score: " + score.ToString();
-                scoreTextOver.text = "Score: " + score.ToString();
-                Debug.Log(score);
-            }
-        }
+        //     if (Mathf.Abs(transform.position.x - enemyLocation.position.x) < 0.5f)
+        //     {
+        //         countScoreState = false;
+        //         // score++;
+        //         // scoreText.text = "Score: " + score.ToString();
+        //         // scoreTextOver.text = "Score: " + score.ToString();
+        //         gameManager.IncreaseScore(1); //
+        //         // Debug.Log(score);
+        //     }
+        // }
     }
 
     void OnCollisionEnter2D(Collision2D col)
