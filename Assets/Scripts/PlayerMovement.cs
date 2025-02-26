@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 10;
+    
     private Rigidbody2D marioBody;
 
     //Variable for Impulse force upwards
-    public float upSpeed = 10;
+    
     private bool onGroundState = true;
-    public float maxSpeed = 20;
+    
 
 
     // global variables
@@ -33,7 +34,12 @@ public class PlayerMovement : MonoBehaviour
 
     // public AudioClip marioDeath;
     public AudioSource marioDeathAudio;
-    public float deathImpulse = 15;
+    
+    public GameConstants gameConstants;
+    float deathImpulse;
+    float upSpeed;
+    float maxSpeed;
+    float speed;
 
     // state
     [System.NonSerialized]
@@ -58,6 +64,15 @@ public class PlayerMovement : MonoBehaviour
         marioAnimator = GetComponent<Animator>();
         // update animator state
         marioAnimator.SetBool("onGround", onGroundState);
+
+        // subscribe to scene manager scene change
+        // SceneManager.activeSceneChanged += SetStartingPosition;
+
+        // Set constants
+        speed = gameConstants.speed;
+        maxSpeed = gameConstants.maxSpeed;
+        deathImpulse = gameConstants.deathImpulse;
+        upSpeed = gameConstants.upSpeed;
 
     }
 
@@ -346,7 +361,27 @@ public class PlayerMovement : MonoBehaviour
         // reset camera position
         gameCamera.position = new Vector3(0, 0, -10);
     }
+
+    public void SetStartingPosition(Scene current, Scene next)
+    {
+        if (next.name == "Mario1-2")
+        {
+            // change the position accordingly in your World-1-2 case
+            this.transform.position = new Vector3(-8.5f, -2.5f, 0.0f);
+        }
+    }
+
+    void  Awake(){
+		Debug.Log("awake called");
+		// other instructions that needs to be done during Awake
+        GameManager.instance.gameRestart.AddListener(GameRestart);
+	}
+
+
+    
 }
+
+
 
 
 

@@ -65,4 +65,11 @@ public class QuestionBox : MonoBehaviour
         istriggered = true;
     }
 
+   public void RestoreBox()
+{
+    istriggered = false;
+    springJoint.enabled = true;
+    questionAnimator.SetTrigger("Reset"); 
+}
+
 }

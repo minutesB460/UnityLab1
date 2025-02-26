@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class HUDManager : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class HUDManager : MonoBehaviour
     public GameObject scoreTextPanel;
 
     public GameObject gameOverPanel;
+
+    public GameObject highscoreText;
+    public IntVariable gameScore;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +56,28 @@ public class HUDManager : MonoBehaviour
         gameOverPanel.SetActive(true);
         scoreText.transform.localPosition = scoreTextPosition[1];
         restartButton.localPosition = restartButtonPosition[1];
+
+        // set highscore
+        highscoreText.GetComponent<TextMeshProUGUI>().text = "TOP- " + gameScore.previousHighestValue.ToString("D6");
+        // show
+        highscoreText.SetActive(true);
         
+    }
+
+    void  Awake(){
+		Debug.Log("awake called");
+		// other instructions that needs to be done during Awake
+        // subscribe to events
+        GameManager.instance.gameStart.AddListener(GameStart);
+        GameManager.instance.gameOver.AddListener(GameOver);
+        GameManager.instance.gameRestart.AddListener(GameStart);
+        GameManager.instance.scoreChange.AddListener(SetScore);
+	}
+
+    public void ReturnToMain()
+    {
+        // TODO
+        Debug.Log("Return to main menu");
+        SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
     }
 }
